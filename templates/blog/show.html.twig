@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{publication}}{% endblock %}
+
+ {% block body %}
+    <h2>{{publication}}</h2>
+    <p>{{publication.content}}<p>
+
+    {% if comments|length > 0 %}
+        {% for comment in comments %}
+            <small>
+                {{ comment.publishedAt|format_datetime('medium', 'short') }}
+            </small>
+
+            <p>{{ comment.content }}</p>
+        {% endfor %}
+    {% else %}
+        <div>Il n'y a pas de commentaire pour cette publication.</div>
+    {% endif %}
+{% endblock %}
