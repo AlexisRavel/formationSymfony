@@ -7,6 +7,10 @@
     <h2>{{publication}}</h2>
     <p>{{publication.content}}<p>
 
+    {# Ajout de commentaires #}
+    <h2>Ajouter un commentaire</h2>
+    {{ form(comment_form) }}
+
     {# Commentaires du post #}
     {% if comments|length > 0 %}
         {% for comment in comments %}

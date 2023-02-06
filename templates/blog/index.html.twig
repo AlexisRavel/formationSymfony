@@ -3,6 +3,7 @@
 {% block title %}Bienvenue sur mon Blog !{% endblock %}
 
 {% block body %}
+    {# Post et le lien vers ce dernier #}
     {% for publication in publications %}
         <h4>{{publication.title}}</h4>
         <p>
@@ -10,6 +11,7 @@
         </p>
     {% endfor %}
 
+    {# Boutons pour faire défiler les articles deux par deux #}
     {% if previous >= 0 %}
         <a href="{{ path('app_blog', { offset: previous }) }}">Previous</a>
     {% endif %}
