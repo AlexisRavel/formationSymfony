@@ -34,13 +34,13 @@ class Post
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
-    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Tags::class, orphanRemoval: true)]
-    private Collection $tag;
+    #[ORM\ManyToMany(targetEntity: Tags::class, inversedBy: 'posts')]
+    private Collection $tags;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-        $this->tag = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -138,19 +138,22 @@ class Post
         return $this;
     }
 
+    public function __toString() {
+        return $this->getTitle();
+    }
+
     /**
      * @return Collection<int, Tags>
      */
-    public function getTag(): Collection
+    public function getTags(): Collection
     {
-        return $this->tag;
+        return $this->tags;
     }
 
     public function addTag(Tags $tag): self
     {
-        if (!$this->tag->contains($tag)) {
-            $this->tag->add($tag);
-            $tag->setPost($this);
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
         }
 
         return $this;
@@ -158,17 +161,8 @@ class Post
 
     public function removeTag(Tags $tag): self
     {
-        if ($this->tag->removeElement($tag)) {
-            // set the owning side to null (unless already changed)
-            if ($tag->getPost() === $this) {
-                $tag->setPost(null);
-            }
-        }
+        $this->tags->removeElement($tag);
 
         return $this;
-    }
-
-    public function __toString() {
-        return $this->getTitle();
     }
 }
