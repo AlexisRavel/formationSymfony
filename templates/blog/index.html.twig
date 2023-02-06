@@ -9,4 +9,11 @@
             <a href="{{ path('publication', { id: publication.id}) }}">Plus de détails</a>
         </p>
     {% endfor %}
+
+    {% if previous >= 0 %}
+        <a href="{{ path('app_blog', { offset: previous }) }}">Previous</a>
+    {% endif %}
+    {% if next < nbPosts %}
+        <a href="{{ path('app_blog', { offset: next }) }}">Next</a>
+    {% endif %}
 {% endblock %}

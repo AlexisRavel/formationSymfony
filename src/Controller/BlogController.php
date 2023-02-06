@@ -15,11 +15,15 @@ class BlogController extends AbstractController {
     #[Route('/', name: 'app_blog', defaults: ['page'=>'1'], methods: ['GET'])]
     #[Route('/page/{page<[1-9]\d{0,8}>}', name: 'app_blog_page', methods: ['GET'])]
 
-    public function index(PostRepository $posts): Response {        
-        $latestPosts = $posts->findAll();
+    public function index(Request $request, PostRepository $posts): Response {   
+        $offset = max(0, $request->query->getInt('offset', 0));     
+        $latestPosts = $posts->getCommentPaginator($offset);
         
         return $this->render('blog/index.html.twig', [
             'publications' => $latestPosts,
+            'previous' => $offset - PostRepository::PAGINATOR_PER_PAGE,
+            'next' => min(count($latestPosts), $offset + PostRepository::PAGINATOR_PER_PAGE),
+            'nbPosts' => count($latestPosts),
         ]);
     }
 

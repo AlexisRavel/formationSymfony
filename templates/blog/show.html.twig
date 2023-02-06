@@ -3,9 +3,11 @@
 {% block title %}{{publication}}{% endblock %}
 
  {% block body %}
+    {# Contenu du post #}
     <h2>{{publication}}</h2>
     <p>{{publication.content}}<p>
 
+    {# Commentaires du post #}
     {% if comments|length > 0 %}
         {% for comment in comments %}
             <small>
@@ -15,6 +17,8 @@
             <p>{{ comment.content }}</p>
         {% endfor %}
 
+        {# Bouton d'affichage des commentaires
+           Les commentaires s'affichent 2 par 2 #}
         {% if previous >= 0 %}
             <a href="{{ path('publication', { id: publication.id, offset: previous }) }}">Previous</a>
         {% endif %}
