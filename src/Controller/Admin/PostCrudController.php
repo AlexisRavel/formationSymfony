@@ -3,10 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Post;
-
+use DateTime;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
@@ -29,6 +30,7 @@ class PostCrudController extends AbstractCrudController {
         yield TextField::new('slug', "Lien");
         yield TextField::new('summary', "Résumé");
         yield TextareaField::new('content', "Contenu")->hideOnIndex();
+        yield DateTimeField::new('PublishedAt', "Publié à");
     }
 
     /*
