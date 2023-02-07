@@ -37,6 +37,10 @@ class Post
     #[ORM\ManyToMany(targetEntity: Tags::class, inversedBy: 'posts')]
     private Collection $tags;
 
+    #[ORM\ManyToOne(inversedBy: 'auteurPost')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $auteur = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -162,6 +166,18 @@ class Post
     public function removeTag(Tags $tag): self
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getAuteur(): ?User
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?User $auteur): self
+    {
+        $this->auteur = $auteur;
 
         return $this;
     }
