@@ -3,13 +3,20 @@
 {% block title %}{{publication}}{% endblock %}
 
  {% block body %}
+    <a href="{{ path('app_login') }}">Connexion</a>
+
     {# Contenu du post #}
     <h2>{{publication}}</h2>
     <p>{{publication.content}}<p>
 
     {# Ajout de commentaires #}
+    {# if app.user -> si l'utilisateur est connecté #}
     <h2>Ajouter un commentaire</h2>
-    {{ form(comment_form) }}
+    {% if app.user %}
+        {{ form(comment_form) }}
+    {% else %}
+        <p>Veuillez vous connecter</p>
+    {% endif %}
 
     {# Commentaires du post #}
     {% if comments|length > 0 %}

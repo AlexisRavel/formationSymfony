@@ -45,6 +45,7 @@ class Post
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->PublishedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

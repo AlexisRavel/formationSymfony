@@ -3,6 +3,8 @@
 {% block title %}Bienvenue sur mon Blog !{% endblock %}
 
 {% block body %}
+    <a href="{{ path('app_login') }}">Connexion</a>
+
     {# Post et le lien vers ce dernier #}
     {% for publication in publications %}
         <h4>{{publication.title}}</h4>

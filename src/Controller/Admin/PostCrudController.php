@@ -30,7 +30,6 @@ class PostCrudController extends AbstractCrudController {
         yield TextField::new('slug', "Lien");
         yield TextField::new('summary', "Résumé");
         yield TextareaField::new('content', "Contenu")->hideOnIndex();
-        yield DateTimeField::new('PublishedAt', "Publié à");
     }
 
     /*
