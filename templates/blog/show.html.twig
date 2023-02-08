@@ -25,6 +25,7 @@
                 {{ comment.publishedAt|format_datetime('medium', 'short') }}
             </small>
 
+            <p>{{comment.auteur}}</p>
             <p>{{ comment.content }}</p>
         {% endfor %}
 

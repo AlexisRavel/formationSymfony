@@ -46,6 +46,7 @@ class BlogController extends AbstractController {
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPost($post);
             $comment->setPublishedAt(new \DateTimeImmutable());
+            $comment->setAuteur($this->getUser());
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
 
