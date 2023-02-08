@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %} {{user}} {% endblock %}
+
+{% block body %}
+
+    <h1>{{user}}</h1>
+    {% if user.auteurPost|length > 0 %}
+        <h2>Liste de post(s): </h2>
+        {% for publi in user.auteurPost %}
+            <a href="{{ path('publication', { id: publi.id}) }}">{{publi.title}}</a> <br>
+        {% endfor %}
+    {% endif %}
+
+    {% if user.auteurComments|length > 0 %}
+        <h2>Liste de commentaire(s): </h2>
+        {% for comment in user.auteurComments %}
+            <p><a href="{{ path('publication', { id: comment.post.id}) }}">{{comment.post.title}}</a> :</p>
+            {{comment.content}} <br>
+        {% endfor %}
+    {% endif %}
+
+    <br><br><a href="{{ path('app_blog') }}">Retour au site</a>
+
+{% endblock %}

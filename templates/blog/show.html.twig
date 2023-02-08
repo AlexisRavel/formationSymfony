@@ -6,12 +6,14 @@
     <a href="{{ path('app_login') }}">Connexion</a>
 
     {# Contenu du post #}
-    <h2>{{publication}}</h2>
+    <h1>{{publication}}</h1>
     <p>{{publication.content}}<p>
+    <a href="{{ path('utilisateur', { id: publication.auteur.id }) }}">{{publication.auteur}}</a>
+    <a href="{{ path('app_blog') }}">Retour au site</a>
 
     {# Ajout de commentaires #}
     {# if app.user -> si l'utilisateur est connecté #}
-    <h2>Ajouter un commentaire</h2>
+    <h3>Ajouter un commentaire</h3>
     {% if app.user %}
         {{ form(comment_form) }}
     {% else %}
@@ -25,7 +27,7 @@
                 {{ comment.publishedAt|format_datetime('medium', 'short') }}
             </small>
 
-            <p>{{comment.auteur}}</p>
+            <a href="{{ path('utilisateur', { id: comment.auteur.id }) }}">{{comment.auteur}}</a>
             <p>{{ comment.content }}</p>
         {% endfor %}
 

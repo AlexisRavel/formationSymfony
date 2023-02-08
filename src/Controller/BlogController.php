@@ -14,6 +14,7 @@ use App\Repository\CommentRepository;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Form\CommentFormType;
+use App\Repository\UserRepository;
 
 class BlogController extends AbstractController {
     private EntityManagerInterface $entityManager;
@@ -59,6 +60,15 @@ class BlogController extends AbstractController {
             'previous' => $offset - CommentRepository::PAGINATOR_PER_PAGE,
             'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE),
             'comment_form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/user/{id}', name: 'utilisateur')]
+    public function user(Request $request, UserRepository $userRepository): Response {
+        $user = $userRepository->findOneBy(array('id' => $request->get('id')));
+
+        return $this->render('blog/user.html.twig', [
+            'user' => $user,
         ]);
     }
 }
