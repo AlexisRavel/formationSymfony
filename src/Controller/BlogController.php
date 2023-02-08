@@ -22,6 +22,7 @@ class BlogController extends AbstractController {
         $this->entityManager = $entityManager;
     }
 
+    // Index du blog
     #[Route('/', name: 'app_blog', defaults: ['page'=>'1'], methods: ['GET'])]
     #[Route('/page/{page<[1-9]\d{0,8}>}', name: 'app_blog_page', methods: ['GET'])]
     public function index(Request $request, PostRepository $posts): Response {   
@@ -36,6 +37,7 @@ class BlogController extends AbstractController {
         ]);
     }
 
+    // Affichage du post et de ses commentaires
     #[Route('/publication/{id}', name: 'publication')]
     public function show(Request $request, Post $post, CommentRepository $commentRepository): Response {
         $offset = max(0, $request->query->getInt('offset', 0));
@@ -63,6 +65,7 @@ class BlogController extends AbstractController {
         ]);
     }
 
+    // Affichage d'un utilisateur avec sa liste de posts et de commentaires
     #[Route('/user/{id}', name: 'utilisateur')]
     public function user(Request $request, UserRepository $userRepository): Response {
         $user = $userRepository->findOneBy(array('id' => $request->get('id')));

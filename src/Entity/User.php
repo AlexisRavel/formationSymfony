@@ -35,8 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $auteurComments;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->auteurPost = new ArrayCollection();
         $this->auteurComments = new ArrayCollection();
     }
