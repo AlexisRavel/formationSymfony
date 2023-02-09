@@ -8,21 +8,35 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: PostRepository::class)]
-class Post
-{
+#[ApiResource(
+    normalizationContext: ['groups' => ['post:read']],
+    denormalizationContext: ['groups' => ['post:write']],
+    collectionOperations: ['get'],
+    itemOperations: ['get', 'put', 'delete']
+)]
+class Post {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['post:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['post:read', 'post:write'])]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     #[ORM\Column(length: 60)]
+    #[Groups(['post:read', 'post:write'])]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['post:read', 'post:write'])]
     private ?string $summary = null;
 
     #[ORM\Column(type: Types::TEXT)]
