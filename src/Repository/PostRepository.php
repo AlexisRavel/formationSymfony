@@ -17,7 +17,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  * @method Post[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class PostRepository extends ServiceEntityRepository {
-    public const PAGINATOR_PER_PAGE = 2;
+    public const PAGINATOR_PER_PAGE = 3;
 
     public function __construct(ManagerRegistry $registry)
     {

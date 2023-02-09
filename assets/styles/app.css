@@ -1,3 +1,18 @@
 body {
     background-color: lightgray;
 }
+
+header {
+    text-align: right;
+}
+
+header a {
+    padding: 10px;
+}
+
+.post {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0% 40% 0% 40%;
+}

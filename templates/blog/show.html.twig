@@ -3,7 +3,12 @@
 {% block title %}{{publication}}{% endblock %}
 
  {% block body %}
-    <a href="{{ path('app_login') }}">Connexion</a>
+    {# REACT #}
+    {% if app.user != null %}
+        <div {{ react_component('Header', {'user': {"id":app.user.id, "name":app.user.username}}) }}></div>
+    {% else %}
+        <div {{ react_component('App', {'user': null}) }}></div>
+    {% endif %}
 
     {# Contenu du post #}
     <h1>{{publication}}</h1>
