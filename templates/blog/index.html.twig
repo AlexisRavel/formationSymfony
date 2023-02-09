@@ -5,6 +5,15 @@
 {% block body %}
     <a href="{{ path('app_login') }}">Connexion</a>
 
+    <div {{ stimulus_controller('hello') }}></div>
+
+    {# REACT #}
+    {% if app.user != null %}
+        <div {{ react_component('App', {'user': {"id":app.user.id, "name":app.user.username}}) }}></div>
+    {% else %}
+        <div {{ react_component('App', {'user': null}) }}></div>
+    {% endif %}
+
     {# Post et le lien vers ce dernier #}
     {% for publication in publications %}
         <h4>{{publication.title}}</h4>
